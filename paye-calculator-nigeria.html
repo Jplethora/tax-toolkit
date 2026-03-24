@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PAYE Calculator Nigeria (Estimate Salary Tax & Take-Home Pay)</title>
+
+<meta name="description" content="Use this PAYE calculator to estimate your salary tax in Nigeria. See deductions, tax breakdown, and your take-home pay instantly.">
+
+<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/paye-calculator-nigeria.html">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  padding: 20px;
+  color: #222;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+input, button {
+  padding: 12px;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 16px;
+}
+
+button {
+  background: #0073e6;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #005bb5;
+}
+
+.result {
+  margin-top: 25px;
+  padding: 20px;
+  background: #eef6ff;
+  border-radius: 6px;
+}
+
+.note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.cta {
+  margin-top: 25px;
+  padding: 15px;
+  background: #f0fff4;
+  border-left: 4px solid #28a745;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>PAYE Calculator Nigeria</h1>
+
+<p><strong>Short answer:</strong> Enter your monthly salary to estimate how much PAYE tax you pay and your take-home salary.</p>
+
+<p>
+This calculator uses standard Nigerian tax rules including CRA and pension deductions to give you a clear estimate.
+</p>
+
+<h2>How to use this calculator</h2>
+
+<ul>
+<li>Enter your monthly salary</li>
+<li>Click calculate</li>
+<li>View your tax breakdown and net salary</li>
+</ul>
+
+<label><strong>Monthly Salary (₦)</strong></label>
+<input type="number" id="salary" placeholder="e.g. 200000">
+
+<button onclick="calculatePAYE()">Calculate PAYE</button>
+
+<div class="result" id="result"></div>
+
+<h2>What this calculation includes</h2>
+
+<ul>
+<li>Consolidated Relief Allowance (CRA)</li>
+<li>Pension contribution (8%)</li>
+<li>Nigeria progressive tax bands</li>
+</ul>
+
+<p class="note">
+This is an estimate based on standard assumptions. Actual tax may vary depending on salary structure and additional deductions.
+</p>
+
+<div class="cta">
+<h3>Not sure if your tax is correct?</h3>
+
+<p>
+If your actual deductions are different from this result, it may be due to allowances or adjustments.
+</p>
+
+<p>
+👉 <a href="mailto:your@email.com">Get help understanding your tax</a>
+</p>
+</div>
+
+<hr>
+
+<p>
+👉 <a href="https://jplethora.github.io/tax-toolkit/personal-income-tax-nigeria.html">
+Learn more about income tax in Nigeria
+</a>
+</p>
+
+</div>
+
+<script>
+function calculatePAYE() {
+
+  let monthly = parseFloat(document.getElementById("salary").value);
+
+  if (!monthly || monthly <= 0) {
+    document.getElementById("result").innerHTML = "<p>Please enter a valid salary.</p>";
+    return;
+  }
+
+  let annual = monthly * 12;
+
+  let pension = annual * 0.08;
+
+  let cra = Math.max(200000, annual * 0.01) + (annual * 0.2);
+
+  let taxableIncome = annual - pension - cra;
+
+  if (taxableIncome < 0) taxableIncome = 0;
+
+  let remaining = taxableIncome;
+  let tax = 0;
+  let breakdown = "";
+
+  function applyBand(limit, rate, label) {
+    let amount = Math.min(remaining, limit);
+    let bandTax = amount * rate;
+
+    if (amount > 0) {
+      breakdown += `<p>${label}: ₦${amount.toFixed(2)} × ${rate*100}% = ₦${bandTax.toFixed(2)}</p>`;
+    }
+
+    tax += bandTax;
+    remaining -= amount;
+  }
+
+  applyBand(300000, 0.07, "First ₦300,000");
+  applyBand(300000, 0.11, "Next ₦300,000");
+  applyBand(500000, 0.15, "Next ₦500,000");
+  applyBand(500000, 0.19, "Next ₦500,000");
+  applyBand(1600000, 0.21, "Next ₦1,600,000");
+
+  if (remaining > 0) {
+    let extraTax = remaining * 0.24;
+    tax += extraTax;
+    breakdown += `<p>Above ₦3.2M: ₦${remaining.toFixed(2)} × 24% = ₦${extraTax.toFixed(2)}</p>`;
+  }
+
+  let monthlyTax = tax / 12;
+  let netSalary = monthly - monthlyTax;
+
+  document.getElementById("result").innerHTML = `
+    <h3>Calculation Breakdown</h3>
+
+    <p><strong>Annual Salary:</strong> ₦${annual.toFixed(2)}</p>
+    <p><strong>Pension (8%):</strong> ₦${pension.toFixed(2)}</p>
+    <p><strong>CRA:</strong> ₦${cra.toFixed(2)}</p>
+    <p><strong>Taxable Income:</strong> ₦${taxableIncome.toFixed(2)}</p>
+
+    <h4>Tax Bands</h4>
+    ${breakdown}
+
+    <hr>
+
+    <p><strong>Monthly Tax:</strong> ₦${monthlyTax.toFixed(2)}</p>
+    <p><strong>Net Salary:</strong> ₦${netSalary.toFixed(2)}</p>
+  `;
+}
+</script>
+
+</body>
+  </html>
