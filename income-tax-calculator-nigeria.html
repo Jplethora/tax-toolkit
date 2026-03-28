@@ -116,7 +116,19 @@ let freelance = parseFloat(document.getElementById("freelance").value) || 0;
 let business = parseFloat(document.getElementById("business").value) || 0;
 let pension = parseFloat(document.getElementById("pension").value) || 0;
 
-let totalIncome = salary + freelance + business;
+// 🚨 LOSS HANDLING
+let warning = "";
+
+if (business < 0 || freelance < 0) {
+  warning = `
+  <p style="color:red;">
+  ⚠️ Losses are not fully accounted for in this estimate. Tax treatment of losses can vary.
+  </p>
+  `;
+}
+
+// Prevent negative income reducing total incorrectly
+let totalIncome = Math.max(0, salary) + Math.max(0, freelance) + Math.max(0, business);
 
 // CRA
 let CRA = Math.max(200000, (0.2 * totalIncome) + 200000);
@@ -128,7 +140,7 @@ if (taxableIncome < 0) taxableIncome = 0;
 let remaining = taxableIncome;
 let tax = 0;
 
-// Bands
+// Tax bands
 function band(limit, rate) {
   let amount = Math.min(remaining, limit);
   tax += amount * rate;
@@ -161,19 +173,26 @@ document.getElementById("result").innerHTML = `
 <p><strong>Annual Tax:</strong> ₦${tax.toLocaleString()}</p>
 <p><strong>Monthly Tax:</strong> ₦${monthlyTax.toLocaleString()}</p>
 
+${warning}
+
 <button class="copy-btn" onclick="copyResult()">Copy Result</button>
 
 <div class="cta">
 <h4>Need a more accurate breakdown?</h4>
-<p>Your actual tax may vary based on allowances and structure.</p>
-<p>👉 <a href="mailto:jerismahplethora@gmail.com?subject=Tax%20Help%20Request">
+<p>
+If you have business losses, multiple income streams, or complex deductions, your tax may differ.
+</p>
+<p>
+👉 <a href="mailto:jerismahplethora@gmail.com?subject=Tax%20Help%20Request">
 Get personalized tax guidance
-</a></p>
+</a>
+</p>
 </div>
 `;
 
 }
 
+// Copy function
 function copyResult() {
   let text = document.getElementById("result").innerText;
   navigator.clipboard.writeText(text);
