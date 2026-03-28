@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nigeria Income Tax Calculator (Freelancers & Multiple Income)</title>
+
+<meta name="description" content="Calculate your total income tax in Nigeria including salary, freelance, and business income. Get instant breakdown and take-home estimates.">
+
+<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/income-tax-calculator-nigeria.html">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+button {
+  background: #0073e6;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background: #eef6ff;
+  border-radius: 6px;
+}
+
+.cta {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff3cd;
+}
+
+.copy-btn {
+  margin-top: 10px;
+  background: #28a745;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Nigeria Income Tax Calculator</h1>
+
+<p>
+Estimate your total tax if you earn from salary, freelance, or business income.
+</p>
+
+<h3>How to use</h3>
+<ul>
+<li>Enter your <strong>annual income</strong> (not monthly)</li>
+<li>Include all income sources</li>
+<li>Enter pension if applicable</li>
+<li>Click calculate</li>
+</ul>
+
+<label>Annual Salary (₦)</label>
+<input type="number" id="salary" placeholder="e.g. 2,400,000">
+
+<label>Freelance Income (₦)</label>
+<input type="number" id="freelance" placeholder="e.g. 1,200,000">
+
+<label>Business Income (₦)</label>
+<input type="number" id="business" placeholder="e.g. 800,000">
+
+<label>Pension Contribution (₦)</label>
+<input type="number" id="pension" placeholder="Optional">
+
+<button onclick="calculateTax()">Calculate Tax</button>
+
+<div class="result" id="result"></div>
+
+<h3>Example</h3>
+<p>
+If you earn ₦2,000,000 annually and contribute ₦200,000 pension, your tax is calculated after applying CRA and tax bands.
+</p>
+
+<hr>
+
+<p>
+👉 <a href="https://jplethora.github.io/tax-toolkit/paye-calculator-nigeria.html">
+Use PAYE calculator for salary-only income
+</a>
+</p>
+
+</div>
+
+<script>
+
+function calculateTax() {
+
+let salary = parseFloat(document.getElementById("salary").value) || 0;
+let freelance = parseFloat(document.getElementById("freelance").value) || 0;
+let business = parseFloat(document.getElementById("business").value) || 0;
+let pension = parseFloat(document.getElementById("pension").value) || 0;
+
+let totalIncome = salary + freelance + business;
+
+// CRA
+let CRA = Math.max(200000, (0.2 * totalIncome) + 200000);
+
+// Taxable
+let taxableIncome = totalIncome - CRA - pension;
+if (taxableIncome < 0) taxableIncome = 0;
+
+let remaining = taxableIncome;
+let tax = 0;
+
+// Bands
+function band(limit, rate) {
+  let amount = Math.min(remaining, limit);
+  tax += amount * rate;
+  remaining -= amount;
+}
+
+band(300000, 0.07);
+band(300000, 0.11);
+band(500000, 0.15);
+band(500000, 0.19);
+band(1600000, 0.21);
+
+if (remaining > 0) tax += remaining * 0.24;
+
+// Minimum tax
+let minTax = totalIncome * 0.01;
+if (tax < minTax) tax = minTax;
+
+let monthlyTax = tax / 12;
+
+document.getElementById("result").innerHTML = `
+<h3>Result</h3>
+
+<p><strong>Total Income:</strong> ₦${totalIncome.toLocaleString()}</p>
+<p><strong>CRA Relief:</strong> ₦${CRA.toLocaleString()}</p>
+<p><strong>Pension:</strong> ₦${pension.toLocaleString()}</p>
+
+<hr>
+
+<p><strong>Annual Tax:</strong> ₦${tax.toLocaleString()}</p>
+<p><strong>Monthly Tax:</strong> ₦${monthlyTax.toLocaleString()}</p>
+
+<button class="copy-btn" onclick="copyResult()">Copy Result</button>
+
+<div class="cta">
+<h4>Need a more accurate breakdown?</h4>
+<p>Your actual tax may vary based on allowances and structure.</p>
+<p>👉 <a href="mailto:jerismahplethora@gmail.com?subject=Tax%20Help%20Request">
+Get personalized tax guidance
+</a></p>
+</div>
+`;
+
+}
+
+function copyResult() {
+  let text = document.getElementById("result").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Result copied!");
+}
+
+</script>
+
+</body>
+</html>
