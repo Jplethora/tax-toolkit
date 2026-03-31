@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Freelancer Tax Calculator Nigeria (2026 Guide)</title>
+
+<meta name="description" content="Estimate your freelancer or self-employed tax in Nigeria. Calculate your tax after expenses, reliefs, and deductions.">
+
+<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/freelancer-tax-calculator-nigeria.html">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+button {
+  background: #0073e6;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background: #eef6ff;
+}
+
+.warning {
+  color: red;
+  margin-top: 10px;
+}
+
+.cta {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff3cd;
+}
+
+.copy-btn {
+  background: #28a745;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Freelancer Tax Calculator (Nigeria)</h1>
+
+<p>
+If you earn from freelance work, remote jobs, or business, use this calculator to estimate your annual tax in Nigeria.
+</p>
+
+<h3>How to use</h3>
+<ul>
+<li>Enter your total annual income</li>
+<li>Enter your business expenses (costs of running your work)</li>
+<li>Click calculate to see your tax estimate</li>
+</ul>
+
+<label>Total Annual Income (₦)</label>
+<input type="number" id="income" placeholder="e.g. 3,000,000">
+
+<label>Business Expenses (₦)</label>
+<input type="number" id="expenses" placeholder="e.g. 500,000">
+
+<label>Pension Contribution (₦)</label>
+<input type="number" id="pension" placeholder="Optional">
+
+<button onclick="calculateTax()">Calculate Tax</button>
+
+<div class="result" id="result"></div>
+
+<h3>Example</h3>
+<p>
+Income: ₦3,000,000 → Expenses: ₦500,000 → Profit: ₦2,500,000 → Tax calculated after reliefs.
+</p>
+
+<hr>
+
+<p>
+👉 <a href="paye-calculator-nigeria.html">Use PAYE calculator if you earn salary</a>
+</p>
+
+</div>
+
+<script>
+
+function calculateTax() {
+
+let income = parseFloat(document.getElementById("income").value) || 0;
+let expenses = parseFloat(document.getElementById("expenses").value) || 0;
+let pension = parseFloat(document.getElementById("pension").value) || 0;
+
+let warning = "";
+
+// Validate
+if (income <= 0) {
+  alert("Please enter your income");
+  return;
+}
+
+// Loss scenario
+if (expenses > income) {
+  warning = `<p class="warning">⚠️ You are reporting a loss. Tax treatment of losses may vary and is not fully reflected here.</p>`;
+}
+
+// Profit (do not allow negative to distort tax)
+let profit = Math.max(0, income - expenses);
+
+// CRA
+let CRA = Math.max(200000, (0.2 * profit) + 200000);
+
+// Taxable income
+let taxableIncome = profit - CRA - pension;
+if (taxableIncome < 0) taxableIncome = 0;
+
+let remaining = taxableIncome;
+let tax = 0;
+
+// Tax bands
+function band(limit, rate) {
+  let amount = Math.min(remaining, limit);
+  tax += amount * rate;
+  remaining -= amount;
+}
+
+band(300000, 0.07);
+band(300000, 0.11);
+band(500000, 0.15);
+band(500000, 0.19);
+band(1600000, 0.21);
+
+if (remaining > 0) tax += remaining * 0.24;
+
+// Minimum tax (based on profit)
+let minTax = profit * 0.01;
+if (tax < minTax) tax = minTax;
+
+let monthlyTax = tax / 12;
+
+// Output
+document.getElementById("result").innerHTML = `
+<h3>Result</h3>
+
+<p><strong>Total Income:</strong> ₦${income.toLocaleString()}</p>
+<p><strong>Expenses:</strong> ₦${expenses.toLocaleString()}</p>
+<p><strong>Profit:</strong> ₦${profit.toLocaleString()}</p>
+<p><strong>CRA Relief:</strong> ₦${CRA.toLocaleString()}</p>
+
+<hr>
+
+<p><strong>Annual Tax:</strong> ₦${tax.toLocaleString()}</p>
+<p><strong>Monthly Tax:</strong> ₦${monthlyTax.toLocaleString()}</p>
+
+${warning}
+
+<button class="copy-btn" onclick="copyResult()">Copy Result</button>
+
+<div class="cta">
+<h4>Need help filing your tax?</h4>
+<p>
+Freelancer tax can be confusing — especially with deductions and compliance.
+</p>
+<p>
+👉 <a href="mailto:jerismahplethora@gmail.com?subject=Freelancer%20Tax%20Help">
+Get personalized guidance
+</a>
+</p>
+</div>
+`;
+
+}
+
+// Copy function
+function copyResult() {
+  let text = document.getElementById("result").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Result copied!");
+}
+
+</script>
+
+</body>
+</html>
