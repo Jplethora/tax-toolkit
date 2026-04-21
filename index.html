@@ -1,10 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Playables SDK -->
+<script>// Playables SDK v1.0.0
+// Game lifecycle bridge: rAF-based game-ready detection + event communication
+(function() {
+  'use strict';
+
+  // Idempotency: skip if already initialized (e.g., server-side injection
+  // followed by client-side inject-javascript via the Bloks webview component).
+  if (window.playablesSDK) return;
+
+  var HANDLER_NAME = 'playablesGameEventHandler';
+  var ANDROID_BRIDGE_NAME = '_MetaPlayablesBridge';
+  var RAF_FRAME_THRESHOLD = 3;
+
+  var gameReadySent = false;
+  var firstInteractionSent = false;
+  var errorSent = false;
+  var frameCount = 0;
+  var originalRAF = window.requestAnimationFrame;
+
+  // --- Transport Layer ---
+
+  function hasIOSBridge() {
+    return !!(window.webkit &&
+              window.webkit.messageHandlers &&
+              window.webkit.messageHandlers[HANDLER_NAME]);
+  }
+
+  function hasAndroidBridge() {
+    return !!(window[ANDROID_BRIDGE_NAME] &&
+              typeof window[ANDROID_BRIDGE_NAME].postEvent === 'function');
+  }
+
+  function isInIframe() {
+    return !!(window.parent && window.parent !== window);
+  }
+
+  function sendEvent(eventName, payload) {
+    var message = {
+      type: eventName,
+      payload: payload || {},
+      timestamp: Date.now()
+    };
+
+    if (hasIOSBridge()) {
+      try {
+        window.webkit.messageHandlers[HANDLER_NAME].postMessage(message);
+      } catch (e) { /* ignore */ }
+      return;
+    }
+
+    if (hasAndroidBridge()) {
+    try {
+      var p = payload || {};
+      p.__secureToken = window.__fbAndroidBridgeAuthToken || '';
+      window[ANDROID_BRIDGE_NAME].postEvent(
+        eventName,
+        JSON.stringify(p)
+      );
+    } catch (e) { /* ignore */ }
+    return;
+  }
+
+    if (isInIframe()) {
+      try {
+        window.parent.postMessage(message, '*');
+      } catch (e) { /* ignore */ }
+      return;
+    }
+  }
+
+  // --- rAF Game-Ready Detection ---
+
+  function onFrame() {
+    if (gameReadySent) return;
+
+    frameCount++;
+    if (frameCount >= RAF_FRAME_THRESHOLD) {
+      gameReadySent = true;
+      sendEvent('game_ready', {
+        frame_count: frameCount,
+        detected_at: Date.now()
+      });
+      return;
+    }
+
+    originalRAF.call(window, onFrame);
+  }
+
+  if (originalRAF) {
+    window.requestAnimationFrame = function(callback) {
+      if (!gameReadySent) {
+        return originalRAF.call(window, function(timestamp) {
+          frameCount++;
+          if (frameCount >= RAF_FRAME_THRESHOLD && !gameReadySent) {
+            gameReadySent = true;
+            sendEvent('game_ready', {
+              frame_count: frameCount,
+              detected_at: Date.now()
+            });
+          }
+          callback(timestamp);
+        });
+      }
+      return originalRAF.call(window, callback);
+    };
+  }
+
+  // --- First User Interaction Detection ---
+
+  function setupFirstInteractionDetection() {
+    var events = ['touchstart', 'mousedown', 'keydown'];
+
+    function onFirstInteraction() {
+      if (firstInteractionSent) return;
+      firstInteractionSent = true;
+      sendEvent('user_interaction_start', null);
+
+      for (var i = 0; i < events.length; i++) {
+        document.removeEventListener(events[i], onFirstInteraction, true);
+      }
+    }
+
+    for (var i = 0; i < events.length; i++) {
+      document.addEventListener(events[i], onFirstInteraction, true);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupFirstInteractionDetection);
+  } else {
+    setupFirstInteractionDetection();
+  }
+
+  // --- Auto Error Capture ---
+
+  window.addEventListener('error', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    sendEvent('error', {
+      message: event.message || 'Unknown error',
+      source: event.filename || '',
+      lineno: event.lineno || 0,
+      colno: event.colno || 0,
+      auto_captured: true
+    });
+  });
+
+  window.addEventListener('unhandledrejection', function(event) {
+    if (errorSent) return;
+    errorSent = true;
+    var reason = event.reason;
+    sendEvent('error', {
+      message: (reason instanceof Error) ? reason.message : String(reason),
+      type: 'unhandled_promise_rejection',
+      auto_captured: true
+    });
+  });
+
+  // --- Public API ---
+
+  window.playablesSDK = {
+    complete: function(score) {
+      sendEvent('game_ended', {
+        score: score,
+        completed: true
+      });
+    },
+
+    error: function(message) {
+      if (errorSent) return;
+      errorSent = true;
+      sendEvent('error', {
+        message: message || 'Unknown error',
+        auto_captured: false
+      });
+    },
+
+    sendEvent: function(eventName, payload) {
+      if (!eventName || typeof eventName !== 'string') return;
+      sendEvent(eventName, payload);
+    }
+  };
+
+  // Kick off rAF detection in case no game code calls rAF immediately
+  if (originalRAF) {
+    originalRAF.call(window, onFrame);
+  }
+})();</script>
+<script>window.Intl=window.Intl||{};Intl.t=function(s){return(Intl._locale&&Intl._locale[s])||s;};</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jerisma Plethora — Nigeria's 2026 Tax Reforms, Explained</title>
-    <meta name="description" content="Jerisma Plethora helps Nigerians understand the 2026 Tax Act. Use our free PAYE calculator, read updates, and book a consultation with Michael Alabi.">
+    <meta name="description" content="Jerisma Plethora helps Nigerians understand the 2026 Tax Act. Use our free PAYE calculator, read updates, and book a consultation with our team.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -264,7 +454,7 @@
                     <div class="relative bg-white rounded-[24px] p-8 border-2 border-[#C9A227] shadow-xl shadow-[#C9A227]/10">
                         <div class="absolute -top-3 left-8 px-3 py-1 rounded-full bg-[#C9A227] text-[#0B1F3A] text-[11px] font-bold uppercase tracking-wider">Most Popular</div>
                         <h3 class="text-xl font-semibold text-[#0B1F3A] mt-2">Paid Consultation</h3>
-                        <p class="mt-3 text-[#4B5563] text-[15px] leading-relaxed">1-on-1 with Michael. We review your payslips, business structure, and reliefs. You leave with exact figures and filing plan.</p>
+                        <p class="mt-3 text-[#4B5563] text-[15px] leading-relaxed">1-on-1 with our lead consultant. We review your payslips, business structure, and reliefs. You leave with exact figures and filing plan.</p>
                         <div class="mt-6 pt-6 border-t border-black/5">
                             <div class="text-sm text-[#4B5563]">Price</div>
                             <div class="text-2xl font-bold text-[#0B1F3A]">Custom</div>
@@ -303,16 +493,17 @@
                     <div class="shrink-0">
                         <div class="w-40 h-40 rounded-full bg-gradient-to-br from-[#C9A227] to-[#b8941f] p-[3px] shadow-2xl">
                             <div class="w-full h-full rounded-full bg-[#0B1F3A] flex items-center justify-center">
-                                <span class="text-5xl font-bold text-[#C9A227]">MA</span>
+                                <span class="text-5xl font-bold text-[#C9A227]">JP</span>
                             </div>
                         </div>
+                    </div>
                     <div class="text-center md:text-left">
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Michael Alabi, Founder</h2>
-                        <p class="mt-1 text-[#C9A227] font-medium">Ex-Banker • Auditor • Tax Educator</p>
-                        <p class="mt-5 text-[17px] leading-relaxed text-white/80 max-w-2xl">Michael has spent most of his career inside Nigeria's financial system — first as a banker, then as an auditor — helping businesses and individuals untangle their accounts. He started Jerisma Plethora to translate new tax laws into practical steps you can act on, not just read about.</p>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Jerisma Plethora Team</h2>
+                        <p class="mt-1 text-[#C9A227] font-medium">Independent Tax Strategists • Lagos, Nigeria</p>
+                        <p class="mt-5 text-[17px] leading-relaxed text-white/80 max-w-2xl">With over 15 years guiding individuals and SMEs through Nigeria's changing tax landscape, we founded Jerisma Plethora to make the 2026 reforms clear and actionable. We focus on practical audits, not theory — translating law into checklists you can use today.</p>
                         <div class="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
-                            <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs">10+ Years Experience</span>
-                            <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs">ICAN Member</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs">15+ Years Experience</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs">Tax Advisory</span>
                             <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs">Lagos, Nigeria</span>
                         </div>
                     </div>
@@ -374,19 +565,20 @@
                         <form id="contactForm" class="bg-[#FAF9F6] rounded-2xl p-6 sm:p-8 border border-black/5 shadow-sm">
                             <div class="grid sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-[#0B1F3A] mb1.5">Name</label>
+                                    <label class="block text-sm font-medium text-[#0B1F3A] mb-1.5">Name</label>
                                     <input required name="name" type="text" class="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#C9A227]/30 focus:border-[#C9A227]" placeholder="Your full name">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-[#0B1F3A] mb1.5">Email</label>
+                                    <label class="block text-sm font-medium text-[#0B1F3A] mb-1.5">Email</label>
                                     <input required name="email" type="email" class="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#C9A227]/30 focus:border-[#C9A227]" placeholder="you@company.com">
                                 </div>
+                            </div>
                             <div class="mt-4">
-                                <label class="block text-sm font-medium text-[#0B1F3A] mb1.5">Message</label>
+                                <label class="block text-sm font-medium text-[#0B1F3A] mb-1.5">Message</label>
                                 <textarea required name="message" rows="4" class="w-full px-4 py-3 rounded-xl bg-white border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#C9A227]/30 focus:border-[#C9A227]" placeholder="Tell us about your tax situation..."></textarea>
                             </div>
                             <div class="mt-6 flex items-center justify-between">
-                                <p class="text-xs text-[#4B5563]">We’ll never share your data.</p>
+                                <p class="text-xs text-[#4B5563]">We'll never share your data.</p>
                                 <button type="submit" class="px-6 py-3 rounded-xl bg-[#C9A227] text-[#0B1F3A] font-semibold hover:bg-[#b8941f] transition shadow-sm">Send Message</button>
                             </div>
                         </form>
