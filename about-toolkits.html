@@ -1,153 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>About Nigeria Tax Toolkit (Simple Tax Guide for Residents & Diaspora)</title>
-
-<meta name="description" content="Learn about the Nigeria Tax Toolkit – a simple educational resource helping residents, freelancers, businesses, and diaspora Nigerians understand tax obligations.">
-
-<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/about-toolkits.html">
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.7;
-  margin: 0;
-  padding: 20px;
-  background: #f9f9f9;
-  color: #222;
-}
-
-.container {
-  max-width: 800px;
-  margin: auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 8px;
-}
-
-h1 {
-  font-size: 26px;
-  margin-bottom: 10px;
-}
-
-h2 {
-  margin-top: 25px;
-  color: #333;
-}
-
-p {
-  margin: 10px 0;
-}
-
-ul {
-  margin: 10px 0 20px 20px;
-}
-
-li {
-  margin-bottom: 8px;
-}
-
-.section {
-  margin-bottom: 20px;
-}
-
-.highlight {
-  background: #eef6ff;
-  padding: 12px;
-  border-left: 4px solid #0073e6;
-  margin: 15px 0;
-}
-
-.cta {
-  margin-top: 25px;
-  padding: 15px;
-  background: #f0fff4;
-  border-left: 4px solid #28a745;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Nigeria Tax Toolkit - Jerisma Plethora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3 {
+            color: #0B1F3A;
+            letter-spacing: -0.01em;
+        }
+        .prose p {
+            line-height: 1.8;
+        }
+        .prose a {
+            text-decoration: underline;
+            text-decoration-color: #C9A227;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+            transition: color 0.2s ease;
+        }
+        .prose a:hover {
+            color: #C9A227;
+        }
+    </style>
 </head>
+<body class="bg-[#FAF9F6] text-gray-800">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-[#0B1F3A]/95 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-[68px]">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-[#C9A227] flex items-center justify-center font-bold text-[#0B1F3A] shadow-md shadow-[#C9A227]/20 group-hover:scale-105 transition-transform">JP</div>
+                    <span class="text-white font-semibold text-[17px] tracking-wide">Jerisma Plethora</span>
+                </a>
+                
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-white/80 hover:text-white transition-colors text-[15px] font-medium">Home</a>
+                    <a href="calculator.html" class="text-white/80 hover:text-white transition-colors text-[15px] font-medium">Calculator</a>
+                    <a href="articles.html" class="text-white/80 hover:text-white transition-colors text-[15px] font-medium">Articles</a>
+                    <a href="articles.html" class="ml-2 inline-flex items-center gap-2 bg-[#C9A227] text-[#0B1F3A] px-4 py-2 rounded-full text-[14px] font-semibold hover:bg-[#d4b03a] transition shadow-lg shadow-[#C9A227]/20">
+                        Explore Toolkit
+                    </a>
+                </nav>
 
-<body>
+                <button id="menuBtn" class="md:hidden p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition">
+                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-[#0B1F3A]">
+            <nav class="px-4 py-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2.5 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition">Home</a>
+                <a href="calculator.html" class="block px-3 py-2.5 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition">Calculator</a>
+                <a href="articles.html" class="block px-3 py-2.5 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition">Articles</a>
+            </nav>
+        </div>
+    </header>
 
-<div class="container">
+    <main class="py-8 sm:py-12 lg:py-16">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="Breadcrumb" class="mb-6">
+                <ol class="flex items-center gap-1.5 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-[#C9A227] transition-colors">Home</a></li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mx-1 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></li>
+                    <li><a href="articles.html" class="hover:text-[#C9A227] transition-colors">Articles</a></li>
+                    <li class="flex items-center"><svg class="w-4 h-4 mx-1 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg></li>
+                    <li class="text-[#0B1F3A] font-medium truncate" aria-current="page">About Toolkit</li>
+                </ol>
+            </nav>
 
-<h1>About the Nigeria Tax Toolkit</h1>
+            <!-- Article Card -->
+            <article class="bg-white rounded-[20px] shadow-xl shadow-[#0B1F3A]/5 ring-1 ring-black/[0.03] overflow-hidden">
+                <div class="h-1.5 w-full bg-gradient-to-r from-[#0B1F3A] via-[#0B1F3A] to-[#C9A227]"></div>
+                
+                <div class="p-6 sm:p-10 lg:p-12 prose max-w-none">
+                    <div class="mb-8">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F6] text-[#0B1F3A] text-xs font-semibold ring-1 ring-[#0B1F3A]/10">NIGERIA TAX TOOLKIT</span>
+                        <h1 class="text-[32px] sm:text-[40px] font-bold leading-tight mt-4 mb-4 text-[#0B1F3A]">About the Nigeria Tax Toolkit</h1>
+                        <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">The Nigeria Tax Toolkit is an educational resource designed to help individuals and businesses understand Nigerian tax obligations in clear, practical terms.</p>
+                    </div>
 
-<p>
-The Nigeria Tax Toolkit is an educational resource designed to help individuals and businesses understand Nigerian tax obligations in clear, practical terms.
-</p>
+                    <!-- Highlight Box -->
+                    <div class="my-8 bg-sky-50 border-l-4 border-sky-400 p-5 sm:p-6 rounded-r-xl">
+                        <div class="flex gap-3">
+                            <svg class="w-5 h-5 text-sky-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <p class="text-sky-900 font-medium leading-relaxed m-0">It simplifies complex tax topics into easy-to-understand guidance without technical or legal jargon.</p>
+                        </div>
+                    </div>
 
-<div class="highlight">
-It simplifies complex tax topics into easy-to-understand guidance without technical or legal jargon.
-</div>
+                    <p class="text-gray-700">For many Nigerians, tax information is fragmented across different agencies, outdated blog posts, and dense regulations. This makes it difficult to know what applies to you, when to file, and how to stay compliant. The Toolkit was created to solve that problem by bringing together the essentials in one trusted place.</p>
 
-<p>
-Many people find Nigerian tax laws difficult to navigate due to fragmented information and technical language. This toolkit provides structured guidance to improve awareness and help users understand typical compliance expectations.
-</p>
+                    <h2 class="text-2xl sm:text-[28px] font-bold mt-12 mb-4">Purpose of This Resource</h2>
+                    <p class="text-gray-700">Our goal is to make Nigerian tax literacy accessible to everyone. Whether you're employed, self-employed, or running a small business, this resource breaks down what you need to know into actionable steps.</p>
+                    <p class="text-gray-700 mt-4">This toolkit answers common questions such as:</p>
+                    
+                    <ul class="mt-5 space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0"></span><span>How to obtain a Tax Identification Number (TIN)</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0"></span><span>Personal income tax obligations for residents</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0"></span><span>Tax responsibilities for freelancers and remote workers</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0"></span><span>Tax considerations for Nigerians living abroad</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#C9A227] flex-shrink-0"></span><span>Basic compliance requirements for small businesses</span></li>
+                    </ul>
 
-<h2>Purpose of This Resource</h2>
+                    <h2 class="text-2xl sm:text-[28px] font-bold mt-12 mb-4">Who This Toolkit Is For</h2>
+                    <div class="grid sm:grid-cols-2 gap-3 mt-5">
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-[#FAF9F6] ring-1 ring-[#0B1F3A]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#0B1F3A]/5 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-[#0B1F3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+                            <div><p class="font-medium text-[#0B1F3A] m-0 text-[15px]">Young professionals</p><p class="text-sm text-gray-600 m-0 mt-0.5">Getting your first TIN and understanding PAYE</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-[#FAF9F6] ring-1 ring-[#0B1F3A]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#0B1F3A]/5 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-[#0B1F3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+                            <div><p class="font-medium text-[#0B1F3A] m-0 text-[15px]">Salaried employees</p><p class="text-sm text-gray-600 m-0 mt-0.5">Verifying deductions and annual returns</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-[#FAF9F6] ring-1 ring-[#0B1F3A]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#0B1F3A]/5 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-[#0B1F3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg></div>
+                            <div><p class="font-medium text-[#0B1F3A] m-0 text-[15px]">Freelancers & creators</p><p class="text-sm text-gray-600 m-0 mt-0.5">Earning in Naira, USD, or crypto</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-[#FAF9F6] ring-1 ring-[#0B1F3A]/5">
+                            <div class="w-8 h-8 rounded-lg bg-[#0B1F3A]/5 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-[#0B1F3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <div><p class="font-medium text-[#0B1F3A] m-0 text-[15px]">Nigerians in diaspora</p><p class="text-sm text-gray-600 m-0 mt-0.5">Understanding residency and double taxation</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-[#FAF9F6] ring-1 ring-[#0B1F3A]/5 sm:col-span-2">
+                            <div class="w-8 h-8 rounded-lg bg-[#0B1F3A]/5 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-[#0B1F3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+                            <div><p class="font-medium text-[#0B1F3A] m-0 text-[15px]">SMEs & startups</p><p class="text-sm text-gray-600 m-0 mt-0.5">Company income tax, VAT, and basic filings</p></div>
+                        </div>
+                    </div>
 
-<p>
-The purpose of the Nigeria Tax Toolkit is to provide general educational guidance on common tax matters affecting individuals and businesses connected to Nigeria.
-</p>
+                    <h2 class="text-2xl sm:text-[28px] font-bold mt-12 mb-4">Important Disclaimer</h2>
+                    <div class="bg-amber-50/70 ring-1 ring-amber-200/50 rounded-xl p-5 sm:p-6">
+                        <p class="text-gray-800 m-0">The Nigeria Tax Toolkit is provided for general educational and informational purposes only. It does not constitute tax, legal, or financial advice. While we strive to keep information accurate and up to date, Nigerian tax laws and administrative practices change frequently.</p>
+                        <p class="text-gray-800 mt-4 mb-0">Always verify details with the Federal Inland Revenue Service (FIRS), your State Internal Revenue Service, or a qualified tax professional before making decisions. Jerisma Plethora accepts no liability for actions taken based on the content of this toolkit.</p>
+                    </div>
 
-<p>It helps answer questions such as:</p>
+                    <h2 class="text-2xl sm:text-[28px] font-bold mt-12 mb-5">Explore the Toolkit</h2>
+                    <div class="space-y-3 not-prose">
+                        <a href="how-to-get-tin-nigeria.html" class="group flex items-center justify-between p-4 sm:p-5 rounded-xl border border-gray-200 hover:border-[#C9A227]/50 hover:bg-[#FAF9F6] transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#0B1F3A] text-white flex items-center justify-center font-semibold text-sm">1</div>
+                                <div>
+                                    <p class="font-semibold text-[#0B1F3A] group-hover:text-[#0B1F3A]">How to Get Your TIN in Nigeria</p>
+                                    <p class="text-sm text-gray-500">Step-by-step guide for individuals and businesses</p>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#C9A227] group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="personal-income-tax-nigeria.html" class="group flex items-center justify-between p-4 sm:p-5 rounded-xl border border-gray-200 hover:border-[#C9A227]/50 hover:bg-[#FAF9F6] transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#0B1F3A] text-white flex items-center justify-center font-semibold text-sm">2</div>
+                                <div>
+                                    <p class="font-semibold text-[#0B1F3A]">Personal Income Tax in Nigeria</p>
+                                    <p class="text-sm text-gray-500">PAYE, rates, reliefs, and filing basics</p>
+                                </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#C9A227] group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="freelancer-tax-nigeria.html" class="group flex items-center justify-between p-4 sm:p-5 rounded-xl border border-gray-200 hover:border-[#C9A227]/50 hover:bg-[#FAF9F6] transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#0B1F3A] text-white flex items-center justify-center font-semibold text-sm">3</div>
+                                <div>
+                                    <p class="font-semibold text-[#0B1F3A]">Freelancer Tax Guide</p>
+                                    <p class="text-sm text-gray-500">Invoicing, record-keeping, and remittance</p>
+                                </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#C9A227] group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="do-nigerians-abroad-pay-tax.html" class="group flex items-center justify-between p-4 sm:p-5 rounded-xl border border-gray-200 hover:border-[#C9A227]/50 hover:bg-[#FAF9F6] transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-[#0B1F3A] text-white flex items-center justify-center font-semibold text-sm">4</div>
+                                <div>
+                                    <p class="font-semibold text-[#0B1F3A]">Do Nigerians Abroad Pay Tax?</p>
+                                    <p class="text-sm text-gray-500">Residency rules and foreign income</p>
+                                </div>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-[#C9A227] group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
 
-<ul>
-<li>How to obtain a Tax Identification Number (TIN)</li>
-<li>Personal income tax obligations for residents</li>
-<li>Tax responsibilities for freelancers and remote workers</li>
-<li>Tax considerations for Nigerians living abroad</li>
-<li>Basic compliance requirements for small businesses</li>
-</ul>
+                    <!-- CTA Box -->
+                    <div class="mt-12 bg-emerald-50 border-l-4 border-emerald-500 p-6 sm:p-7 rounded-r-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div>
+                                <p class="text-[#0B1F3A] font-semibold text-lg m-0">Need help getting started?</p>
+                                <p class="text-emerald-900/80 mt-1 m-0">Begin with our comprehensive overview and checklist.</p>
+                            </div>
+                            <a href="start-here-nigeria-tax-guide.html" class="inline-flex items-center justify-center gap-2 bg-[#0B1F3A] text-white px-5 py-3 rounded-xl font-semibold hover:bg-[#0B1F3A]/90 transition shadow-lg shadow-[#0B1F3A]/20 whitespace-nowrap">
+                                Start with the Nigeria Tax Guide
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
 
-<h2>Who This Toolkit Is For</h2>
+            <div class="mt-8 text-center">
+                <a href="articles.html" class="inline-flex items-center gap-2 text-[#0B1F3A] font-medium hover:text-[#C9A227] transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back to all Articles
+                </a>
+            </div>
+        </div>
+    </main>
 
-<p>This resource is designed for:</p>
+    <!-- Footer -->
+    <footer class="bg-[#0B1F3A] mt-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-md bg-[#C9A227] flex items-center justify-center font-bold text-[#0B1F3A] text-sm shadow">JP</div>
+                    <span class="text-white/90 font-medium">Jerisma Plethora</span>
+                </div>
+                <div class="flex items-center gap-6 text-sm">
+                    <a href="index.html" class="text-white/60 hover:text-[#C9A227] transition">Home</a>
+                    <a href="articles.html" class="text-white/60 hover:text-[#C9A227] transition">Articles</a>
+                    <a href="calculator.html" class="text-white/60 hover:text-[#C9A227] transition">Calculator</a>
+                </div>
+                <p class="text-white/50 text-sm">© 2026 Jerisma Plethora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<ul>
-<li>Nigerian residents seeking to understand tax obligations</li>
-<li>Freelancers and remote workers earning income locally or internationally</li>
-<li>Small business owners and startups</li>
-<li>Nigerians living abroad with financial interests in Nigeria</li>
-<li>Foreign investors seeking general tax awareness</li>
-</ul>
-
-<h2>Important Disclaimer</h2>
-
-<p>
-This toolkit is provided for informational and educational purposes only. It does not constitute legal, financial, or tax advice.
-</p>
-
-<p>
-Tax obligations may vary depending on individual circumstances such as residency, income sources, and regulatory updates. Users are encouraged to seek professional advice where necessary.
-</p>
-
-<h2>Explore the Toolkit</h2>
-
-<p>You can explore key guides below:</p>
-
-<ul>
-<li><a href="https://jplethora.github.io/tax-toolkit/how-to-get-tin-nigeria.html">How to Get a Tax Identification Number (TIN) in Nigeria</a></li>
-<li><a href="https://jplethora.github.io/tax-toolkit/personal-income-tax-nigeria.html">Understanding Personal Income Tax in Nigeria</a></li>
-<li><a href="https://jplethora.github.io/tax-toolkit/freelancer-tax-nigeria.html">Tax Obligations for Freelancers in Nigeria</a></li>
-<li><a href="https://jplethora.github.io/tax-toolkit/do-nigerians-abroad-pay-tax.html">Do Nigerians Abroad Pay Tax in Nigeria?</a></li>
-</ul>
-
-<div class="cta">
-<p><strong>Need help getting started?</strong></p>
-
-<p>
-👉 <a href="https://jplethora.github.io/tax-toolkit/start-here-nigeria-tax-guide.html">
-Start with the Nigeria Tax Guide
-</a>
-</p>
-</div>
-
-</div>
-
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            menuIcon.innerHTML = isOpen 
+                ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />'
+                : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+        });
+    </script>
 </body>
 </html>
