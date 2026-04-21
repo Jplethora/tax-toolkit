@@ -1,131 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Nigeria Tax Toolkit for Diaspora & Foreign Investors (Simple Guide)</title>
-
-<meta name="description" content="A simple Nigeria tax toolkit for diaspora and foreign investors. Learn tax rules on foreign income, remittances, and compliance without confusion.">
-
-<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/diaspora.html">
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f9fc;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    h1 {
-      color: #0a3d62;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    h2 {
-      color: #1e3799;
-      font-size: 20px;
-      margin-top: 30px;
-    }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-    }
-    ul {
-      margin-top: 15px;
-      margin-bottom: 25px;
-    }
-    ul li {
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-    .cta a {
-      background: #1e3799;
-      color: #ffffff;
-      padding: 15px 30px;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 5px;
-      display: inline-block;
-    }
-    .cta a:hover {
-      background: #0c2461;
-    }
-    .disclaimer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #555;
-      background: #f1f2f6;
-      padding: 15px;
-      border-radius: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nigeria Tax Toolkit for Diaspora & Foreign Investors | Jerisma Plethora</title>
+    <meta name="description" content="Free educational toolkit for Nigerians abroad and foreign investors with Nigerian financial interests.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B1F3A',
+                        gold: '#C9A227',
+                        offwhite: '#FAF9F6',
+                    },
+                    fontFamily: {
+                        serif: ['Fraunces', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        ::selection { background-color: rgba(201, 162, 39, 0.2); color: #0B1F3A; }
+    </style>
 </head>
-<body>
+<body class="bg-offwhite text-navy font-sans">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-xl border-b border-white/10">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-[72px]">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-[15px] shadow-md shadow-gold/20 group-hover:scale-105 transition-transform">JP</div>
+                    <span class="font-serif text-[20px] tracking-wide text-offwhite">JERISMA PLETHORA</span>
+                </a>
+                
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#" class="text-sm text-offwhite/70 hover:text-offwhite transition">Services</a>
+                    <a href="#" class="text-sm text-offwhite/70 hover:text-offwhite transition">Insights</a>
+                    <a href="#" class="text-sm text-gold font-medium">Articles</a>
+                    <a href="#" class="text-sm text-offwhite/70 hover:text-offwhite transition">About</a>
+                    <a href="#" class="ml-2 px-4 py-2 bg-white/10 hover:bg-white/15 text-offwhite text-sm rounded-lg border border-white/10 transition">Contact</a>
+                </nav>
 
-  <div class="container">
-    <h1>Nigeria Tax Information Toolkit<br>for Diaspora & Foreign Investors</h1>
-    <p><a href="start-here-nigeria-tax-guide.html">Start Here – Nigeria Tax Guide</a></p>
+                <button id="menuBtn" class="md:hidden p-2 text-offwhite/80">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-navy">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#" class="block text-offwhite/80 py-2">Services</a>
+                <a href="#" class="block text-offwhite/80 py-2">Insights</a>
+                <a href="#" class="block text-gold py-2">Articles</a>
+                <a href="#" class="block text-offwhite/80 py-2">About</a>
+                <a href="#" class="block text-offwhite/80 py-2">Contact</a>
+            </div>
+        </div>
+    </header>
 
-<p style="margin-top:10px;">
-<a href="about-toolkits.html">Learn more about the Nigeria Tax Toolkits</a>
-</p>
-    <p>
-      This free toolkit is designed for Nigerians living abroad, members of the diaspora,
-      and foreign investors who have financial interests, income, or assets connected to Nigeria.
-    </p>
-
-    <p>
-      It provides general tax information and educational guidance to help you better understand
-      common tax-related considerations that may arise in cross-border situations.
-    </p>
-
-    <h2>What This Toolkit Covers</h2>
-
-    <ul>
-      <li>General awareness of Nigerian tax exposure related to foreign income</li>
-      <li>High-level considerations for investments, remittances, and Nigerian-based assets</li>
-      <li>Compliance awareness for Nigerians abroad and international stakeholders</li>
-      <li>Common tax questions faced by diaspora individuals and investors</li>
-    </ul>
-
-    <p>
-      This resource is intended to help you ask the right questions and understand
-      typical issues — not to overwhelm you with technical language.
-    </p>
-
-    <div class="cta">
-      <a href="https://singingfiles.com/ToolkitNigeriaDiaspora?sid=quora_diaspora">
-        Access the Free Toolkit
-      </a>
+    <!-- Breadcrumb -->
+    <div class="bg-offwhite border-b border-navy/5">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 py-4">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center gap-2 text-[13px]">
+                    <li><a href="index.html" class="text-navy/50 hover:text-gold transition">Home</a></li>
+                    <li><svg class="w-3.5 h-3.5 text-navy/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+                    <li><a href="#" class="text-navy/50 hover:text-gold transition">Articles</a></li>
+                    <li><svg class="w-3.5 h-3.5 text-navy/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></li>
+                    <li class="text-navy/70 font-medium">Diaspora</li>
+                </ol>
+            </nav>
+        </div>
     </div>
 
-    <div class="disclaimer">
-      <strong>Important Notice:</strong><br><br>
-      This toolkit is provided for informational and educational purposes only.
-      It does not constitute legal, tax, or financial advice and should not be relied upon
-      as a substitute for professional consultation.
-      <br><br>
-      Tax obligations and interpretations may vary based on individual residency status,
-      income sources, applicable treaties, and regulatory updates.
-      <br><br>
-      For clarification, practical guidance, or one-on-one support, users may contact
-      the support desk via WhatsApp using the details provided inside the toolkit.
-    </div>
+    <main>
+        <article class="max-w-4xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+            <!-- Article Header -->
+            <div class="mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-medium mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+                    DIASPORA RESOURCES
+                </div>
+                <h1 class="font-serif text-[36px] leading-[1.1] md:text-[48px] lg:text-[56px] text-navy tracking-[-0.02em]">Nigeria Tax Information Toolkit for Diaspora & Foreign Investors</h1>
+            </div>
 
-  </div>
+            <!-- Intro -->
+            <div class="prose max-w-none">
+                <p class="text-[19px] md:text-[21px] leading-relaxed text-navy/80 font-light">
+                    This free toolkit is designed for Nigerians living abroad, members of the diaspora, and foreign investors who have financial interests, income, or assets connected to Nigeria. It provides general tax information and educational guidance to help you better understand common tax-related considerations that may arise in cross-border situations.
+                </p>
+            </div>
 
+            <div class="my-12 h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
+
+            <!-- Content -->
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-8">
+                    <h2 class="font-serif text-2xl md:text-[28px] text-navy mb-6">What This Toolkit Covers</h2>
+                    
+                    <div class="space-y-5">
+                        <div class="group flex gap-4">
+                            <div class="flex-shrink-0 w-7 h-7 rounded-full bg-navy flex items-center justify-center mt-0.5 shadow-sm group-hover:scale-110 transition">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-navy mb-1.5">Nigerian Tax Residency Rules</h3>
+                                <p class="text-[15px] leading-relaxed text-navy/70">How Nigeria determines tax residency for citizens living abroad, and the critical difference between resident and non-resident status for tax purposes.</p>
+                            </div>
+                        </div>
+
+                        <div class="group flex gap-4">
+                            <div class="flex-shrink-0 w-7 h-7 rounded-full bg-navy flex items-center justify-center mt-0.5 shadow-sm group-hover:scale-110 transition">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-navy mb-1.5">Foreign Income & Remittances</h3>
+                                <p class="text-[15px] leading-relaxed text-navy/70">The treatment of income earned abroad, money sent home to family, and repatriated investment returns under current Nigerian tax law.</p>
+                            </div>
+                        </div>
+
+                        <div class="group flex gap-4">
+                            <div class="flex-shrink-0 w-7 h-7 rounded-full bg-navy flex items-center justify-center mt-0.5 shadow-sm group-hover:scale-110 transition">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-navy mb-1.5">Double Taxation Agreements (DTAs)</h3>
+                                <p class="text-[15px] leading-relaxed text-navy/70">An overview of Nigeria's tax treaties with the UK, Canada, South Africa, China, and others — and how they help prevent being taxed twice on the same income.</p>
+                            </div>
+                        </div>
+
+                        <div class="group flex gap-4">
+                            <div class="flex-shrink-0 w-7 h-7 rounded-full bg-navy flex items-center justify-center mt-0.5 shadow-sm group-hover:scale-110 transition">
+                                <svg class="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-navy mb-1.5">Property, Investments & Business Interests</h3>
+                                <p class="text-[15px] leading-relaxed text-navy/70">Key compliance considerations for owning real estate, holding shares, or operating a business in Nigeria while living overseas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-6 bg-white rounded-2xl border border-navy/10 shadow-sm">
+                        <p class="text-[15px] leading-relaxed text-navy/80">
+                            Whether you're sending money home, managing rental income in Lagos or Abuja, or considering an investment in Nigerian markets, knowing the right questions to ask is the first step toward making informed financial decisions. This toolkit won't give you personalized advice — but it will equip you to have smarter conversations with your advisors on both sides of the border.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sidebar Card -->
+                <div class="lg:col-span-4">
+                    <div class="sticky top-[100px]">
+                        <div class="bg-navy rounded-2xl p-6 text-offwhite relative overflow-hidden">
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl"></div>
+                            <div class="relative">
+                                <div class="w-10 h-10 rounded-xl bg-gold/15 border border-gold/20 flex items-center justify-center mb-4">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                </div>
+                                <h3 class="font-serif text-xl text-offwhite mb-2">Free Educational Resource</h3>
+                                <p class="text-sm text-offwhite/70 leading-relaxed mb-1">Updated for 2025 • 12-page guide</p>
+                                <p class="text-sm text-offwhite/70 leading-relaxed">No email required</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-16 relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-navy via-[#132e4f] to-navy rounded-[24px]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(201,162,39,0.15),transparent_50%)] rounded-[24px]"></div>
+                <div class="relative px-8 py-12 md:px-12 md:py-14 text-center">
+                    <h3 class="font-serif text-2xl md:text-[30px] text-offwhite mb-3">Ready to get clarity?</h3>
+                    <p class="text-offwhite/70 max-w-xl mx-auto mb-8 text-[15px] leading-relaxed">Access the complete Nigeria Diaspora Tax Toolkit — free, instant, and designed for globally connected Nigerians.</p>
+                    <a href="https://singingfiles.com/ToolkitNigeriaDiaspora?sid=quora_diaspora" class="group inline-flex items-center justify-center px-8 py-4 bg-gold hover:bg-[#d4b03a] text-navy font-semibold rounded-xl shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 transition-all duration-300 hover:-translate-y-0.5">
+                        Access the Free Toolkit
+                        <svg class="ml-2.5 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                    <p class="mt-4 text-xs text-offwhite/50">Opens in a secure viewer • PDF download available</p>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="mt-14">
+                <div class="bg-amber-50/80 backdrop-blur border border-amber-200/60 rounded-2xl p-6 md:p-7">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center ring-1 ring-amber-200">
+                                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                            </div>
+                        <div class="min-w-0 flex-1">
+                            <h4 class="font-semibold text-navy text-[15px] mb-2">Important Notice</h4>
+                            <p class="text-[13.5px] leading-[1.65] text-navy/70">
+                                This toolkit provides general educational information only and does not constitute tax, legal, investment, or professional advice. Nigerian tax legislation, FIRS regulations, and international tax treaties are complex and subject to frequent change and interpretation. This resource does not create a client-advisor relationship with Jerisma Plethora. You must consult a qualified tax professional licensed in Nigeria and your country of residence for advice tailored to your specific circumstances before taking any action or making any decisions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy border-t border-white/10 mt-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-14">
+            <div class="grid md:grid-cols-12 gap-10">
+                <div class="md:col-span-5">
+                    <a href="index.html" class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-full bg-gold flex items-center justify-center text-navy font-bold text-[14px]">JP</div>
+                        <span class="font-serif text-[18px] text-offwhite tracking-wide">JERISMA PLETHORA</span>
+                    </a>
+                    <p class="text-[14px] leading-relaxed text-offwhite/60 max-w-md">Strategic insights and practical resources for globally minded Nigerians and investors navigating cross-border opportunities with clarity.</p>
+                </div>
+                <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 md:justify-items-end">
+                    <div>
+                        <h5 class="text-[12px] font-semibold uppercase tracking-wider text-offwhite/90 mb-4">Company</h5>
+                        <ul class="space-y-3 text-[14px] text-offwhite/60">
+                            <li><a href="#" class="hover:text-gold transition">About</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Insights</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Research</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-[12px] font-semibold uppercase tracking-wider text-offwhite/90 mb-4">Resources</h5>
+                        <ul class="space-y-3 text-[14px] text-offwhite/60">
+                            <li><a href="#" class="hover:text-gold transition">Articles</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Toolkits</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Guides</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-[12px] font-semibold uppercase tracking-wider text-offwhite/90 mb-4">Legal</h5>
+                        <ul class="space-y-3 text-[14px] text-offwhite/60">
+                            <li><a href="#" class="hover:text-gold transition">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Terms of Use</a></li>
+                            <li><a href="#" class="hover:text-gold transition">Disclaimer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[12px] text-offwhite/40">© 2025 Jerisma Plethora. All rights reserved.</p>
+                <p class="text-[12px] text-offwhite/40">Information provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
