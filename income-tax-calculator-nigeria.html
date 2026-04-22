@@ -1,205 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nigeria Income Tax Calculator (Freelancers & Multiple Income)</title>
-
-<meta name="description" content="Calculate your total income tax in Nigeria including salary, freelance, and business income. Get instant breakdown and take-home estimates.">
-
-<link rel="canonical" href="https://jplethora.github.io/tax-toolkit/income-tax-calculator-nigeria.html">
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
-}
-
-.container {
-  max-width: 700px;
-  margin: auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 10px;
-}
-
-input, button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-}
-
-button {
-  background: #0073e6;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.result {
-  margin-top: 20px;
-  padding: 20px;
-  background: #eef6ff;
-  border-radius: 6px;
-}
-
-.cta {
-  margin-top: 20px;
-  padding: 15px;
-  background: #fff3cd;
-}
-
-.copy-btn {
-  margin-top: 10px;
-  background: #28a745;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income tax calculator Nigeria</title>
+  <meta name="description" content="Estimate annual tax for salary, freelance, or small-business style income using a clean educational calculator." />
+  <link rel="canonical" href="" data-canonical />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <script defer src="assets/js/site.js"></script>
 </head>
-
-<body>
-
-<div class="container">
-
-<h1>Nigeria Income Tax Calculator</h1>
-
-<p>
-Estimate your total tax if you earn from salary, freelance, or business income.
-</p>
-
-<h3>How to use</h3>
-<ul>
-<li>Enter your <strong>annual income</strong> (not monthly)</li>
-<li>Include all income sources</li>
-<li>Enter pension if applicable</li>
-<li>Click calculate</li>
-</ul>
-
-<label>Annual Salary (₦)</label>
-<input type="number" id="salary" placeholder="e.g. 2,400,000">
-
-<label>Freelance Income (₦)</label>
-<input type="number" id="freelance" placeholder="e.g. 1,200,000">
-
-<label>Business Income (₦)</label>
-<input type="number" id="business" placeholder="e.g. 800,000">
-
-<label>Pension Contribution (₦)</label>
-<input type="number" id="pension" placeholder="Optional">
-
-<button onclick="calculateTax()">Calculate Tax</button>
-
-<div class="result" id="result"></div>
-
-<h3>Example</h3>
-<p>
-If you earn ₦2,000,000 annually and contribute ₦200,000 pension, your tax is calculated after applying CRA and tax bands.
-</p>
-
-<hr>
-
-<p>
-👉 <a href="https://jplethora.github.io/tax-toolkit/paye-calculator-nigeria.html">
-Use PAYE calculator for salary-only income
-</a>
-</p>
-
-</div>
-
-<script>
-
-function calculateTax() {
-
-let salary = parseFloat(document.getElementById("salary").value) || 0;
-let freelance = parseFloat(document.getElementById("freelance").value) || 0;
-let business = parseFloat(document.getElementById("business").value) || 0;
-let pension = parseFloat(document.getElementById("pension").value) || 0;
-
-// 🚨 LOSS HANDLING
-let warning = "";
-
-if (business < 0 || freelance < 0) {
-  warning = `
-  <p style="color:red;">
-  ⚠️ Losses are not fully accounted for in this estimate. Tax treatment of losses can vary.
-  </p>
-  `;
-}
-
-// Prevent negative income reducing total incorrectly
-let totalIncome = Math.max(0, salary) + Math.max(0, freelance) + Math.max(0, business);
-
-// CRA
-let CRA = Math.max(200000, (0.2 * totalIncome) + 200000);
-
-// Taxable
-let taxableIncome = totalIncome - CRA - pension;
-if (taxableIncome < 0) taxableIncome = 0;
-
-let remaining = taxableIncome;
-let tax = 0;
-
-// Tax bands
-function band(limit, rate) {
-  let amount = Math.min(remaining, limit);
-  tax += amount * rate;
-  remaining -= amount;
-}
-
-band(300000, 0.07);
-band(300000, 0.11);
-band(500000, 0.15);
-band(500000, 0.19);
-band(1600000, 0.21);
-
-if (remaining > 0) tax += remaining * 0.24;
-
-// Minimum tax
-let minTax = totalIncome * 0.01;
-if (tax < minTax) tax = minTax;
-
-let monthlyTax = tax / 12;
-
-document.getElementById("result").innerHTML = `
-<h3>Result</h3>
-
-<p><strong>Total Income:</strong> ₦${totalIncome.toLocaleString()}</p>
-<p><strong>CRA Relief:</strong> ₦${CRA.toLocaleString()}</p>
-<p><strong>Pension:</strong> ₦${pension.toLocaleString()}</p>
-
-<hr>
-
-<p><strong>Annual Tax:</strong> ₦${tax.toLocaleString()}</p>
-<p><strong>Monthly Tax:</strong> ₦${monthlyTax.toLocaleString()}</p>
-
-${warning}
-
-<button class="copy-btn" onclick="copyResult()">Copy Result</button>
-
-<div class="cta">
-<h4>Need a more accurate breakdown?</h4>
-<p>
-If you have business losses, multiple income streams, or complex deductions, your tax may differ.
-</p>
-<p>
-👉 <a href="mailto:jerismahplethora@gmail.com?subject=Tax%20Help%20Request">
-Get personalized tax guidance
-</a>
-</p>
-</div>
-`;
-
-}
-
-// Copy function
-function copyResult() {
-  let text = document.getElementById("result").innerText;
-  navigator.clipboard.writeText(text);
-  alert("Result copied!");
-}
-
-</script>
-
+<body class="standard-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-shell">
+    <a class="brand" href="index.html" aria-label="Jerisma Plethora home">
+      <span class="brand-mark">JP</span>
+      <span class="brand-copy">
+        <strong>Jerisma Plethora</strong>
+        <span>Financial clarity for Nigeria based income and cross-border tax questions.</span>
+      </span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <nav id="primary-nav" class="nav-links" data-nav-links>
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="start-here-nigeria-tax-guide.html">Start Here</a>
+      <a class="nav-link is-active" href="paye-calculator-nigeria.html">Calculators</a>
+      <a class="nav-link" href="diaspora.html">Diaspora</a>
+      <a class="nav-link" href="about-toolkits.html">About</a>
+      <a class="button button-primary nav-cta" href="mailto:jerismahplethora@gmail.com?subject=Jerisma%20Plethora%20Consultation%20Request">Book a Consultation</a>
+    </nav>
+  </div>
+</header>
+  <main id="main-content">
+<section class="page-hero reveal">
+  <div class="container hero-shell article-hero">
+    <div>
+      <p class="eyebrow">Income tax calculator</p>
+      <h1>Estimate personal or business-linked income tax in one place.</h1>
+      <p class="hero-text">Use this version if your income looks more like freelance, consulting, or small-business profit than a simple payroll pattern.</p>
+    </div>
+    <div class="hero-panel subtle-panel">
+      <p class="panel-kicker">Estimate Only</p>
+      <p>The calculator gives an educational estimate using common personal income tax bands and a simplified relief model. Real liabilities may differ.</p>
+    </div>
+  </div>
+</section>
+<section class="content-section">
+  <div class="container content-grid">
+    <article class="article-body reveal">
+      <div class="callout">
+        <strong>How to use it:</strong>
+        Enter annual income, choose the income type that feels closest to your situation, and include pension or deductible expenses where relevant.
+      </div>
+      <form class="calculator-card" data-tax-calculator data-default-mode="business">
+        <div class="calculator-grid">
+          <label>
+            <span>Income type</span>
+            <select name="mode">
+              <option value="salary">Salary / PAYE</option>
+              <option value="freelance">Freelance income</option>
+              <option value="business">Small business income</option>
+            </select>
+          </label>
+          <label>
+            <span>Annual gross income (NGN)</span>
+            <input type="number" name="grossIncome" min="0" step="1000" value="2400000" />
+          </label>
+          <label>
+            <span>Annual pension contribution (NGN)</span>
+            <input type="number" name="pension" min="0" step="1000" value="192000" />
+          </label>
+          <label>
+            <span>Deductible business expenses (NGN)</span>
+            <input type="number" name="expenses" min="0" step="1000" value="0" />
+          </label>
+        </div>
+        <div class="button-row">
+          <button type="submit" class="button button-primary">Calculate now</button>
+          <button type="reset" class="button button-secondary">Reset</button>
+        </div>
+        <p class="microcopy">This is a guide for awareness, not a filing engine.</p>
+      </form>
+      <div class="result-grid" data-calculator-results>
+        <div class="result-card">
+          <span>Estimated taxable income</span>
+          <strong data-result-taxable>NGN 0</strong>
+        </div>
+        <div class="result-card">
+          <span>Estimated annual tax</span>
+          <strong data-result-tax>NGN 0</strong>
+        </div>
+        <div class="result-card">
+          <span>Estimated monthly tax</span>
+          <strong data-result-monthly>NGN 0</strong>
+        </div>
+        <div class="result-card accent">
+          <span>Approximate take-home or post-tax balance</span>
+          <strong data-result-net>NGN 0</strong>
+        </div>
+      </div>
+      <h2>What the estimate includes</h2>
+      <ul class="guide-list">
+        <li>A simplified consolidated relief estimate commonly used in educational tax examples.</li>
+        <li>Nigerian personal income tax bands from 7 percent to 24 percent.</li>
+        <li>A minimum-tax floor for awareness where the computed liability is very low.</li>
+      </ul>
+      <h2>What it does not include</h2>
+      <ul class="guide-list">
+        <li>Special exemptions, treaty issues, or state-specific administrative differences.</li>
+        <li>Complex payroll adjustments, arrears, or tax credits.</li>
+        <li>Professional advice for filings, disputes, or audits.</li>
+      </ul>
+    </article>
+<aside class="content-sidebar">
+  <div class="sidebar-card">
+    <p class="sidebar-label">Recommended Next Step</p>
+    <h3>Start with the guide library</h3>
+    <p>If you want context before estimating, use the Start Here page to move from basics to specialized topics.</p>
+    <a class="button button-primary button-block" href="start-here-nigeria-tax-guide.html">Open Resource</a>
+  </div>
+  <div class="sidebar-card">
+    <p class="sidebar-label">Need tailored help?</p>
+    <h3>Consult with Jerisma Plethora</h3>
+    <p>For a clearer view of your own records, filings, and planning options, send your questions directly to the team.</p>
+    <a class="button button-secondary button-block" href="mailto:jerismahplethora@gmail.com?subject=Jerisma%20Plethora%20Consultation%20Request">Email the team</a>
+  </div>
+  <div class="sidebar-card">
+    <p class="sidebar-label">Premium Guides</p>
+    <h3>Shop on Selar</h3>
+    <p>For deeper walk-throughs, worksheets, and paid resources, visit the Jerisma Plethora Selar store.</p>
+    <a class="button button-secondary button-block" href="https://selar.com/m/michael-alabi2254054" target="_blank" rel="noreferrer">Visit Selar</a>
+  </div>
+</aside>
+  </div>
+</section>
+  </main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="footer-kicker">Jerisma Plethora</p>
+      <h2>Practical tax education with a calm, professional finish.</h2>
+      <p>Use the guides to understand the issue, use the calculators to estimate quickly, and reach out when you want tailored help.</p>
+    </div>
+    <div>
+      <p class="footer-kicker">Quick Links</p>
+      <ul class="footer-links">
+        <li><a href="start-here-nigeria-tax-guide.html">Start Here Guide</a></li>
+        <li><a href="paye-calculator-nigeria.html">PAYE Calculator</a></li>
+        <li><a href="income-tax-calculator-nigeria.html">Income Tax Calculator</a></li>
+        <li><a href="diaspora.html">Diaspora Toolkit</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-kicker">Contact</p>
+      <ul class="footer-links">
+        <li><a href="mailto:jerismahplethora@gmail.com">jerismahplethora@gmail.com</a></li>
+        <li><a href="https://selar.com/m/michael-alabi2254054" target="_blank" rel="noreferrer">Buy guides on Selar</a></li>
+        <li><a href="#" data-link-key="whatsapp">WhatsApp community</a></li>
+        <li><a href="#" data-link-key="telegram">Telegram channel</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span data-current-year></span> Jerisma Plethora. Educational content only - not legal, tax, or financial advice.</p>
+  </div>
+</footer>
 </body>
 </html>
