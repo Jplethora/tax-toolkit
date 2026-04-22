@@ -10,16 +10,9 @@ This folder contains a static site that is ready for GitHub Pages.
 
 ## Update placeholders
 
-The WhatsApp and Telegram links are still placeholders because those final URLs were not provided yet.
-
-Update them in:
+The contact links for WhatsApp and Telegram have already been added in:
 
 - `assets/js/site.js`
-
-Look for:
-
-- `whatsapp`
-- `telegram`
 
 ## Main live pages
 

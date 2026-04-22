@@ -1,6 +1,6 @@
 const siteLinks = {
-  whatsapp: "#",
-  telegram: "#"
+  whatsapp: "https://wa.me/2347025446297",
+  telegram: "https://t.me/+2347025446297"
 };
 
 const taxBands = [
